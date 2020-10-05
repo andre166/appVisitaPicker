@@ -58,30 +58,15 @@ const useStyles = makeStyles((theme) => ({
           }
   }))
 
-export default function Om(){
+export default function CarroForm( { setCarro } ){
      
     const classes = useStyles();
 
-    const theme = useTheme();
-    let [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        
-    }, []);
-
     async function onSubmit( values ){
 
-        console.log("aqui: ", values)
+      setCarro(values);
   
     }
-
-    // if(loading){ return <LoadingPage/>}
-    // let carro1 = { 
-    //     latitude: -42.94753874745315, 
-    //     longitude: -22.79139388319243 , 
-    //     cercaDeAtuacao: 'Área 01 - Manillha - ITB 01' , 
-    //     tipo: 'supervisor' 
-    // };
 
     return(
         <Container component="main" maxWidth="xs" style={{padding: 5}}>
@@ -109,7 +94,7 @@ export default function Om(){
           }}
           render={( { values, handleChange, handleSubmit, errors, touched }) => (
 
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit} autoComplete="off">
 
             <Grid container spacing={1}>
               <Grid item xs={12} sm={6}>

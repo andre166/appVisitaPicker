@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
           }
   }))
 
-export default function Om(){
+export default function VisitaForm( { visitas, setVisitas, carro }){
      
     const classes = useStyles();
 
@@ -58,28 +58,16 @@ export default function Om(){
     let [loading, setLoading] = useState(true);
     let [ supervisorFlag , setSupervisorFlag ] = useState(false);
 
-    useEffect(() => {
-        
-    }, []);
-
     async function onSubmit( values ){
 
-        console.log("aqui: ", values)
+      let listaDeVisitas = visitas;
+
+      listaDeVisitas.push(values);
+
+      setVisitas(listaDeVisitas);
   
     }
 
-    // { 
-    //     latitude: -42.94621969783995, 
-    //     longitude: -22.74293464608822, 
-    //     prioridade: 1, 
-    //     tipo: 'manutencao', 
-    //     nome: 'Zé', 
-    //     supervisor: false
-    // },
-
-    const validar = ( e, values ) =>{
-        return !values;
-    }
     return(
         <Container component="main" maxWidth="xs" style={{padding: 5}}>
         <CssBaseline />
