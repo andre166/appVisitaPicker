@@ -43,6 +43,7 @@ export const useStyles = makeStyles((theme) => ({
       },
   },
   legendasContainer:{
+    borderRadius: 4,
     padding: 10,
     height: '100%',
     background: '#eeeeee',
@@ -58,7 +59,7 @@ function App() {
   
   let [ visitas, setVisitas ] = useState([
     { id: 1, lng: -42.9174767380266, lat: -22.76177906793717, prioridade: 1, tipo: 'instalacao', turno: 'manhã'},
-    { id: 2, lng: -42.94621969783995, lat: -22.74293464608822, prioridade: 2, tipo: 'manutencao', turno: 'tarde', supervisor: false},
+    { id: 2, lng: -42.94621969783995, lat: -22.74293464608822, prioridade: 3, tipo: 'manutencao', turno: 'tarde', supervisor: false},
     { id: 3, lng: -42.91808352712016, lat: -22.76854610370127, prioridade: 3, tipo: 'manutencao', turno: 'manhã'},
     // sem area
     { id: 4, lng: -42.95588883173091, lat: -22.76601944444444, prioridade: 4, tipo: 'instalacao', turno: 'manhã', supervisor: false},
@@ -105,7 +106,7 @@ function App() {
 
   let [ visitaParaCortar, setVisitaParaCortar ] = useState([]);
 
-  const getVisita = async ( _carro ) => {
+  const getVisita = async ( _carro, hora ) => {
 
     if( !_carro ){
       return;
@@ -145,7 +146,8 @@ function App() {
 
     let carro_visita = {
       carro: car,
-      visitas: visitas
+      hora: hora,
+      visitas: visitas,
     }
 
     let resp = await axios.post(`http://localhost:3001/getVisita`, carro_visita)

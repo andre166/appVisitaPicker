@@ -91,6 +91,7 @@ export default function VisitaForm( { visitas, setVisitas, carro }){
             lng: '',
             prioridade: '',
             tipo: '',
+            turno: '',
             supervisor: false
           }}
           render={( { values, handleChange, handleSubmit, setFieldValue }) => (
@@ -157,6 +158,30 @@ export default function VisitaForm( { visitas, setVisitas, carro }){
                 >
 
                 {["Manutenção", "Instalação"].map( (p, i) => (
+
+                    <MenuItem key={i} value={ p } className="option">
+                        {p}
+                    </MenuItem>
+
+                    ))}
+
+                </TextField>
+        
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+                <TextField
+                    variant="outlined"
+                    autoComplete="off"
+                    fullWidth
+                    label="Turno"
+                    name="turno"
+                    value={values.turno}
+                    onChange={handleChange}
+                    select
+                >
+
+                {["Manhã", "Tarde", "Qualquer"].map( (p, i) => (
 
                     <MenuItem key={i} value={ p } className="option">
                         {p}

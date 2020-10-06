@@ -92,6 +92,7 @@ export default function PegarVisitaForm( { setCarro, carro, listaDeCarro, getVis
             cercaDeAtuacao: '',
             tipo: '',
             carro: '',
+            hora: '07:30',
           }}
           render={( { values, handleChange, handleSubmit, errors, touched }) => (
 
@@ -122,6 +123,23 @@ export default function PegarVisitaForm( { setCarro, carro, listaDeCarro, getVis
 
                 </TextField>
 
+                <Grid item xs={12} sm={12}>
+                  <TextField
+                    value={values.hora}
+                    style={{marginTop: 10}}
+                    id="time"
+                    label="Hora"
+                    type="time"
+                    name="hora"
+                    className={classes.textField}
+                    onChange={handleChange}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    
+                  />
+                </Grid>
+
               </Grid>
 
             </Grid>
@@ -135,7 +153,8 @@ export default function PegarVisitaForm( { setCarro, carro, listaDeCarro, getVis
                     variant="contained"
                     color="primary"
                     className={classes.buttonInfo}
-                    onClick={() => getVisita( values.carro )}
+                    onClick={() => getVisita( values.carro, values.hora )}
+                    
                 >
                   pegar Visita
                 </Button>

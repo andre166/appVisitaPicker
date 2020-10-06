@@ -128,7 +128,7 @@ const MyMapComponent = compose(
         <Marker 
           icon={{
             url : './carroSvg.png',
-            scaledSize: new window.google.maps.Size(30,30)
+            scaledSize: new window.google.maps.Size(35,35)
           }} 
           position={{ lat: c.lat, lng:  c.lng}} 
         />
