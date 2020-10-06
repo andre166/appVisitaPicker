@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
           }
   }))
 
-export default function PegarVisitaForm( { setCarro, carro } ){
+export default function PegarVisitaForm( { setCarro, carro, listaDeCarro, getVisita } ){
      
     const classes = useStyles();
 
@@ -69,7 +69,7 @@ export default function PegarVisitaForm( { setCarro, carro } ){
     }
 
     return(
-        <Container component="main" maxWidth="xs" style={{padding: 5}}>
+        <Container component="main" maxWidth="lg" style={{padding: 5}}>
         <CssBaseline />
         <Paper className={classes.paper}>
 
@@ -77,7 +77,7 @@ export default function PegarVisitaForm( { setCarro, carro } ){
 
             <Grid item xs>
                 <Grid container alignItems="center" justify="center">
-                  <h3>Pegar visita</h3>
+                  <h3>Selecionar carro</h3>
                 </Grid>
             </Grid>
 
@@ -91,61 +91,38 @@ export default function PegarVisitaForm( { setCarro, carro } ){
             lng: '',
             cercaDeAtuacao: '',
             tipo: '',
+            carro: '',
           }}
           render={( { values, handleChange, handleSubmit, errors, touched }) => (
 
-          <Form onSubmit={handleSubmit} autoComplete="off">
+          <Form onSubmit={handleSubmit} autoComplete="off" style={{width: '100%'}}>
 
-            <Grid container spacing={1}>
+            <Grid container spacing={1} style={{width: '100%'}}>
 
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={12}>
 
-              <TextField
-                    variant="outlined"
-                    autoComplete="off"
-                    fullWidth
-                    label="Cerca de Atuação"
-                    name="cerca"
-                    value={values.cerca}
-                    onChange={handleChange}
-                    select
-                >
+                <TextField
+                      variant="outlined"
+                      autoComplete="off"
+                      fullWidth
+                      label="Selecione o carro"
+                      name="carro"
+                      value={values.carro}
+                      onChange={handleChange}
+                      select
+                  >
 
-                {carro && carro.map( (p, i) => (
+                  {listaDeCarro && listaDeCarro.map( (p, i) => (
 
                     <MenuItem key={i} value={ p } className="option">
-                        {p}
+                        {p.nome}
                     </MenuItem>
 
-                    ))}
+                  ))}
 
                 </TextField>
 
               </Grid>
-
-              <Grid item xs={12} sm={6}>
-                <TextField
-                    variant="outlined"
-                    autoComplete="off"
-                    fullWidth
-                    label="Tipo"
-                    name="tipo"
-                    value={values.tipo}
-                    onChange={handleChange}
-                    select
-                >
-
-                {['Manutenção', 'Instalação', 'Supervisor'].map( (p, i) => (
-
-                    <MenuItem key={i} value={ p } className="option">
-                        {p}
-                    </MenuItem>
-
-                    ))}
-
-                </TextField>
-        
-            </Grid>
 
             </Grid>
 
@@ -158,6 +135,7 @@ export default function PegarVisitaForm( { setCarro, carro } ){
                     variant="contained"
                     color="primary"
                     className={classes.buttonInfo}
+                    onClick={() => getVisita( values.carro )}
                 >
                   pegar Visita
                 </Button>

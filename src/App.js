@@ -58,8 +58,8 @@ function App() {
   
   let [ visitas, setVisitas ] = useState([
     { id: 1, lng: -42.9174767380266, lat: -22.76177906793717, prioridade: 1, tipo: 'instalacao', turno: 'manhã'},
-    { id: 2, lng: -42.94621969783995, lat: -22.74293464608822, prioridade: 1, tipo: 'manutencao', turno: 'tarde'},
-    { id: 3, lng: -42.91808352712016, lat: -22.76854610370127, prioridade: 1, tipo: 'instalacao', turno: 'manhã'},
+    { id: 2, lng: -42.94621969783995, lat: -22.74293464608822, prioridade: 2, tipo: 'manutencao', turno: 'tarde', supervisor: false},
+    { id: 3, lng: -42.91808352712016, lat: -22.76854610370127, prioridade: 3, tipo: 'manutencao', turno: 'manhã'},
     // sem area
     { id: 4, lng: -42.95588883173091, lat: -22.76601944444444, prioridade: 4, tipo: 'instalacao', turno: 'manhã', supervisor: false},
     { id: 5, lng: -42.90766208502973, lat: -22.74843767642125, prioridade: 3, tipo: 'instalacao', turno: 'tarde'},
@@ -68,8 +68,8 @@ function App() {
     { id: 7, lng: -42.89503997141043, lat: -22.74008743623005, prioridade: 2, tipo: 'instalacao', turno: 'manhã'},
     //area 3
     { id: 8, lng: -42.87450228899651, lat: -22.75279560982237, prioridade: 2, tipo: 'instalacao', nome: 'marcio', turno: 'tarde'},
-    { id: 9, lng: -42.88113353376708, lat: -22.75472553469459, prioridade: 2, tipo: 'instalacao', nome: 'Bia', turno: 'manhã'},
-    { id: 10, lng: -42.86895971683943, lat: -22.75200858240266, prioridade: 4, tipo: 'instalacao', nome: 'carla', turno: 'tarde'},
+    { id: 9, lng: -42.88113353376708, lat: -22.75472553469459, prioridade: 3, tipo: 'manutencao', nome: 'Bia', turno: 'manhã'},
+    { id: 10, lng: -42.86895971683943, lat: -22.75200858240266, prioridade: 4, tipo: 'manutencao', nome: 'carla', turno: 'tarde'},
     //area 4
     { id: 11, lng: -42.85909010602762, lat: -22.78142111007753, prioridade: 2, tipo: 'instalacao', turno: 'manhã'},
     //area 5
@@ -82,8 +82,8 @@ function App() {
   ]);
 
   let [ listaDeCarro, setListaDeCarro ] = useState([
-    { lng: -42.94753874745315, lat: -22.79139388319243 , cercaDeAtuacao: 'Área 01 - Manillha - ITB 01', tipo: 'manutencao' },
-    { lng: -42.92069930546788, lat: -22.78543895098248 , cercaDeAtuacao: 'ÁREA 03 - ITB 03' , tipo: 'manutencao' }
+    { id: 1, lng: -42.94753874745315, lat: -22.79139388319243 , cercaDeAtuacao: 'Área 01 - Manillha - ITB 01', tipo: 'manutencao', nome:'teste1' },
+    { id: 2, lng: -42.92069930546788, lat: -22.78543895098248 , cercaDeAtuacao: 'ÁREA 03 - ITB 03' , tipo: 'manutencao', nome:'teste2' }
   ]);
 
 
@@ -105,9 +105,13 @@ function App() {
 
   let [ visitaParaCortar, setVisitaParaCortar ] = useState([]);
 
-  const teste = async ( ) => {
+  const getVisita = async ( _carro ) => {
 
-    let car = listaDeCarro[0];
+    if( !_carro ){
+      return;
+    }
+
+    let car = _carro ;
 
     if( resultVisitaPicker !== '' ){
 
@@ -124,19 +128,25 @@ function App() {
       if( cortarVisita ){
 
         visitas.splice(index, 1);
-        car.lat = resultVisitaPicker.lat;
-        car.lng = resultVisitaPicker.lng;
+
+        listaDeCarro.map( c => {
+
+          if(c.id == carro.id ){
+            c.lat = resultVisitaPicker.lat;
+            c.lng = resultVisitaPicker.lng;
+
+          }
+
+        })
 
       }
 
     }
 
-
     let carro_visita = {
       carro: car,
       visitas: visitas
     }
-    console.log("carro_visita", carro_visita)
 
     let resp = await axios.post(`http://localhost:3001/getVisita`, carro_visita)
     .catch((error) => { return error });
@@ -212,13 +222,12 @@ function App() {
 
           <Grid container direction="column"  alignItems="flex-start" justify="flex-start" style={{padding: 20}}>
 
-            <h4 style={{margin: 0}}>M: Manhã</h4>
-            <h4 style={{margin: 0}}>T: Tarde</h4>
+            <h4 style={{margin: 0}}>{'M: Manhã <= 12:00'}</h4>
+            <h4 style={{margin: 0}}>{'T: Tarde > 12:00'}</h4>
+            <h4 style={{margin: 0}}>{'Q: Qualquer turno'}</h4>
             
           </Grid>
         </Paper>
-
-
 
         </Grid>
 
@@ -226,9 +235,9 @@ function App() {
 
           <CarroForm setCarro={setCarro}/>
 
-          {/* <PegarVisitaForm carro={carro} setCarro={setCarro} /> */}
+          <PegarVisitaForm listaDeCarro={listaDeCarro} carro={carro} setCarro={setCarro} getVisita={getVisita}/>
 
-          <Button
+          {/* <Button
             size="small"
             style={{margin: '20px 0px 15px 0px'}}
             type="submit"
@@ -238,7 +247,7 @@ function App() {
             onClick={() => teste()}
           >
             pegar Visita
-          </Button>
+          </Button> */}
 
         </div>
 
