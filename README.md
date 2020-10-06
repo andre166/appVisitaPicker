@@ -5,3 +5,5 @@ tipo um botao next, next next...
 4 - vai marcando como feita e calculando a proxima.
 5 - preciso que a visita tbm tenha um parametro manhã ou tarde, respeitar o horario ou omitir esse parametro.
 6 - manha até 12:00, tarde: depois das 12:00.
+
+

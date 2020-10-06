@@ -77,7 +77,7 @@ export default function CarroForm( { setCarro } ){
 
             <Grid item xs>
                 <Grid container alignItems="center" justify="center">
-                  <h3>Gerar carro</h3>
+                  <h3>Cadastrar carro</h3>
                 </Grid>
             </Grid>
 
@@ -179,7 +179,7 @@ export default function CarroForm( { setCarro } ){
                     color="primary"
                     className={classes.buttonSuccess}
                 >
-                  gerar
+                  cadastrar
                 </Button>
               </Grid>
             </Grid>

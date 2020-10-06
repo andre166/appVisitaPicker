@@ -21,8 +21,16 @@ import { useHistory} from 'react-router-dom';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import { makeStyles, fade } from '@material-ui/core/styles';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+
+const cercas = [
+    'Área 01 - Manillha - ITB 01',
+    'área 02 - São joaquim e Joaquim de Oliveira - ITB 02',
+    'ÁREA 03 - ITB 03',
+    'ÁREA 04 - ITB 04',
+    'ÁREA 05 - ITB 05',
+    'ÁREA 06 - ITB 06',
+    'ÁREA 07 - ITB 07'
+]
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -50,21 +58,13 @@ const useStyles = makeStyles((theme) => ({
           }
   }))
 
-export default function VisitaForm( { visitas, setVisitas, carro }){
+export default function PegarVisitaForm( { setCarro, carro } ){
      
     const classes = useStyles();
 
-    const theme = useTheme();
-    let [loading, setLoading] = useState(true);
-    let [ supervisorFlag , setSupervisorFlag ] = useState(false);
-
     async function onSubmit( values ){
 
-      let listaDeVisitas = visitas;
-
-      listaDeVisitas.push(values);
-
-      setVisitas(listaDeVisitas);
+      setCarro(values);
   
     }
 
@@ -77,7 +77,7 @@ export default function VisitaForm( { visitas, setVisitas, carro }){
 
             <Grid item xs>
                 <Grid container alignItems="center" justify="center">
-                  <h3>Cadastrar visita</h3>
+                  <h3>Pegar visita</h3>
                 </Grid>
             </Grid>
 
@@ -89,35 +89,14 @@ export default function VisitaForm( { visitas, setVisitas, carro }){
           initialValues={{
             lat: '',
             lng: '',
-            prioridade: '',
+            cercaDeAtuacao: '',
             tipo: '',
-            supervisor: false
           }}
-          render={( { values, handleChange, handleSubmit, setFieldValue }) => (
+          render={( { values, handleChange, handleSubmit, errors, touched }) => (
 
           <Form onSubmit={handleSubmit} autoComplete="off">
 
             <Grid container spacing={1}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  fullWidth
-                  label="Latitude"
-                  name="lat"
-                  value={values.lat}
-                  onChange={handleChange}
-                />
-
-              </Grid>
-           
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  fullWidth
-                  label="Longitude"
-                  name="lng"
-                  value={values.lng}
-                  onChange={handleChange}
-                />
-              </Grid>
 
               <Grid item xs={12} sm={6}>
 
@@ -125,14 +104,14 @@ export default function VisitaForm( { visitas, setVisitas, carro }){
                     variant="outlined"
                     autoComplete="off"
                     fullWidth
-                    label="Prioridade"
-                    name="prioridade"
-                    value={values.prioridade}
+                    label="Cerca de Atuação"
+                    name="cerca"
+                    value={values.cerca}
                     onChange={handleChange}
                     select
                 >
 
-                {[1,2,3,4].map( (p, i) => (
+                {carro && carro.map( (p, i) => (
 
                     <MenuItem key={i} value={ p } className="option">
                         {p}
@@ -156,7 +135,7 @@ export default function VisitaForm( { visitas, setVisitas, carro }){
                     select
                 >
 
-                {["Manutenção", "Instalação"].map( (p, i) => (
+                {['Manutenção', 'Instalação', 'Supervisor'].map( (p, i) => (
 
                     <MenuItem key={i} value={ p } className="option">
                         {p}
@@ -168,21 +147,6 @@ export default function VisitaForm( { visitas, setVisitas, carro }){
         
             </Grid>
 
-            <Grid item xs={12} sm={6}>
-                <FormControlLabel
-                    control={
-                    <Checkbox
-                        checked={ values.supervisor }
-                        onChange={() => setFieldValue('supervisor', !values.supervisor)}
-                        name="tipo"
-                        color="primary"
-                    />
-                    }
-                    label="Supervisor"
-                />
-            </Grid>
-
-
             </Grid>
 
             <Grid item xs={12} sm={12}>
@@ -193,9 +157,9 @@ export default function VisitaForm( { visitas, setVisitas, carro }){
                     type="submit"
                     variant="contained"
                     color="primary"
-                    className={classes.buttonSuccess}
+                    className={classes.buttonInfo}
                 >
-                  cadastrar
+                  pegar Visita
                 </Button>
               </Grid>
             </Grid>
