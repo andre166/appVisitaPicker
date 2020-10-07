@@ -31,9 +31,9 @@ const definirPino = ( v ) => {
     }else if( v.prioridade == 3){
 
       if(v.supervisor){
-        url = './greenM-super.png'
+        url = './verde.png'
       }else{
-        url = './greenM.png'
+        url = './verde.png'
       }
 
     }else if( v.prioridade == 4){
@@ -67,9 +67,9 @@ const definirPino = ( v ) => {
     }else if( v.prioridade == 3){
 
       if(v.supervisor){
-        url = './greenT-super.png'
+        url = './verde.png'
       }else{
-        url = './greenT.png'
+        url = './verde.png'
       }
 
     }else if( v.prioridade == 4){
@@ -103,9 +103,9 @@ const definirPino = ( v ) => {
     }else if( v.prioridade == 3){
 
       if(v.supervisor){
-        url = './greenQ-super.png'
+        url = './verde.png'
       }else{
-        url = './greenQ.png'
+        url = './verde.png'
       }
 
     }else if( v.prioridade == 4){
