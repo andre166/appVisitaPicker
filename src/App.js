@@ -20,12 +20,13 @@ export const useStyles = makeStyles((theme) => ({
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      width: '100%'
+      width: '100%',
+
     },
     mapContainer: {
       width: '100%',
-      maxWidth: 1400,
-      height: 650,
+      // maxWidth: 1800,
+      height: 850,
       // minHeight: 550
     },
     formContainer: {
@@ -45,6 +46,7 @@ export const useStyles = makeStyles((theme) => ({
       },
   },
   legendasContainer:{
+    // position: 'absolute',
     display: 'flex',
     flexDirection: 'column',
     borderRadius: 4,
@@ -192,21 +194,35 @@ function App() {
   const gerarVisitas = () => {
 
     let response = [
-      { id: 1, lng: -42.9174767380266, lat: -22.76177906793717, prioridade: 1, tipo: 'instalacao', supervisor: false},
-      { id: 2, lng: -42.94621969783995, lat: -22.74293464608822, prioridade: 2, tipo: 'manutencao', turno: 'tarde', supervisor: true},
-      { id: 3, lng: -42.91808352712016, lat: -22.76854610370127, prioridade: 3, tipo: 'manutencao', turno: 'manhã', supervisor: true},
-      { id: 4, lng: -42.95588883173091, lat: -22.76601944444444, prioridade: 4, tipo: 'instalacao', turno: 'manhã', supervisor: false},
-      { id: 5, lng: -42.90766208502973, lat: -22.74843767642125, prioridade: 3, tipo: 'instalacao', turno: 'tarde'},
-      { id: 6, lng: -42.89662241677625, lat: -22.76232999064083, prioridade: 4, tipo: 'instalacao', turno: 'tarde'},
-      { id: 7, lng: -42.89503997141043, lat: -22.74008743623005, prioridade: 2, tipo: 'instalacao', turno: 'manhã'},
-      { id: 8, lng: -42.87450228899651, lat: -22.75279560982237, prioridade: 2, tipo: 'instalacao', nome: 'marcio', turno: 'tarde'},
-      { id: 9, lng: -42.88113353376708, lat: -22.75472553469459, prioridade: 3, tipo: 'manutencao', nome: 'Bia', turno: 'manhã'},
-      { id: 10, lng: -42.86895971683943, lat: -22.75200858240266, prioridade: 4, tipo: 'manutencao', nome: 'carla', turno: 'tarde'},
-      { id: 11, lng: -42.85909010602762, lat: -22.78142111007753, prioridade: 2, tipo: 'instalacao', turno: 'manhã'},
-      { id: 12, lng: -42.8419680348063, lat: -22.7611160495678, prioridade: 1, tipo: 'instalacao', turno: 'tarde'},
-      { id: 13, lng: -42.83855617095151, lat: -22.7443219824802, prioridade: 2, tipo: 'instalacao', turno: 'manhã'},
-      { id: 14, lng: -42.82664386691731, lat: -22.7362615794477, prioridade: 1, tipo: 'instalacao', turno: 'tarde'},
-      { id: 15, lng: -42.86260140596489, lat: -22.7217031755217, prioridade: 2, tipo: 'instalacao', turno: 'manhã'},
+      //itb1
+      { id: 1, lng: -42.9174767380266, lat: -22.76177906793717, prioridade: 1, tipo: 'instalacao', turno: 'tarde'},
+      { id: 2, lng: -42.94621969783995, lat: -22.74293464608822, prioridade: 1, tipo: 'manutencao', turno: 'tarde'},
+
+      { id: 3, lng: -42.91808352712016, lat: -22.76854610370127, prioridade: 1, tipo: 'manutencao', turno: 'manhã'},
+      { id: 4, lng: -42.93947190131398, lat: -22.75734814591831, prioridade: 1, tipo: 'instalacao', turno: 'manhã'},
+
+      { id: 5, lng: -42.94124115518135, lat: -22.77179950150927, prioridade: 1, tipo: 'manutencao',},
+      { id: 6, lng: -42.92620126436422, lat: -22.72078104188679, prioridade: 1, tipo: 'instalacao',},
+
+
+      { id: 7, lng: -42.93073318986911, lat: -22.79720877447686, prioridade: 4, tipo: 'manutencao', turno: 'manhã'},
+      { id: 8, lng: -42.91703727220641, lat: -22.7978452548842, prioridade: 4, tipo: 'manutencao', turno: 'manhã'},
+      { id: 9, lng: -42.92095199563156, lat: -22.73778261871328, prioridade: 4, tipo: 'manutencao', turno: 'manhã'},
+      { id: 10, lng: -42.942435740236, lat: -22.78503718494249, prioridade: 4, tipo: 'manutencao', turno: 'manhã'},
+
+      //itb2
+      { id: 11, lng: -42.95588883173091, lat: -22.76601944444444, prioridade: 1, tipo: 'instalacao', turno: 'manhã'},
+      { id: 12, lng: -42.90766208502973, lat: -22.74843767642125, prioridade: 3, tipo: 'instalacao', turno: 'tarde'},
+      { id: 13, lng: -42.89662241677625, lat: -22.76232999064083, prioridade: 4, tipo: 'instalacao', turno: 'tarde'},
+      { id: 14, lng: -42.89503997141043, lat: -22.74008743623005, prioridade: 2, tipo: 'instalacao', turno: 'manhã'},
+      { id: 15, lng: -42.87450228899651, lat: -22.75279560982237, prioridade: 2, tipo: 'instalacao', nome: 'marcio', turno: 'tarde'},
+      { id: 16, lng: -42.88113353376708, lat: -22.75472553469459, prioridade: 3, tipo: 'manutencao', nome: 'Bia', turno: 'manhã'},
+      { id: 17, lng: -42.86895971683943, lat: -22.75200858240266, prioridade: 4, tipo: 'manutencao', nome: 'carla', turno: 'tarde'},
+      { id: 18, lng: -42.85909010602762, lat: -22.78142111007753, prioridade: 2, tipo: 'instalacao', turno: 'manhã'},
+      { id: 19, lng: -42.8419680348063, lat: -22.7611160495678, prioridade: 1, tipo: 'instalacao', turno: 'tarde'},
+      { id: 20, lng: -42.83855617095151, lat: -22.7443219824802, prioridade: 2, tipo: 'instalacao', turno: 'manhã'},
+      { id: 21, lng: -42.82664386691731, lat: -22.7362615794477, prioridade: 1, tipo: 'instalacao', turno: 'tarde'},
+      { id: 22, lng: -42.86260140596489, lat: -22.7217031755217, prioridade: 2, tipo: 'instalacao', turno: 'manhã'},
   
     ]
 
@@ -216,7 +232,7 @@ function App() {
 
   const gerarCarros = () => {
     let response = [
-      { id: 1, lng: -42.94753874745315, lat: -22.79139388319243 , cercaDeAtuacao: 'Área 01 - Manillha - ITB 01', tipo: 'supervisor', nome:'teste1' },
+      { id: 1, lng: -42.94753874745315, lat: -22.79139388319243 , cercaDeAtuacao: 'Área 01 - Manillha - ITB 01', tipo: 'manutencao', nome:'teste1' },
       { id: 2, lng: -42.92069930546788, lat: -22.78543895098248 , cercaDeAtuacao: 'ÁREA 03 - ITB 03' , tipo: 'manutencao', nome:'teste2' }
     ]
     localStorage.setItem("carrosLocal", JSON.stringify(response));
@@ -249,10 +265,17 @@ function App() {
           <Divider/>
 
           <Grid container direction="row"  alignItems="center" justify="center">
-            {priopridades.map( p => (
+            {priopridades.map( (p, i) => (
+              <>
               <div style={{ background: p.cor, width: 20, height: 20, margin: 5, borderRadius: 3, display: 'flex', alignItems: 'center', justifyContent: 'center'}}> 
-                <h6 style={{color: p.nCor}}>{p.pri}</h6> 
+                <h6 style={{color: p.nCor}}>{p.pri}</h6>
               </div>
+
+              { i !== priopridades.length - 1 && 
+                <strong>></strong>
+              }
+
+              </>
             ))}
           </Grid>
 
