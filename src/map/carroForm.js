@@ -35,11 +35,12 @@ const cercas = [
 const useStyles = makeStyles((theme) => ({
     paper: {
         padding: '10px 20px',
-        marginTop: 5,
+        // marginTop: 5,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        maxWidth: 550
+        maxWidth: 550,
+        height: '100%'
         },
         form: {
           width: '100%', // Fix IE 11 issue.
@@ -64,12 +65,38 @@ export default function CarroForm( { setCarro } ){
 
     async function onSubmit( values ){
 
-      setCarro(values);
+      if( values.tipo == 'Instalação'){
+        values.tipo = 'instalacao'
+      }else if( values.tipo == 'Manutenção'){
+        values.tipo = 'manutencao'
+      }else if( values.tipo == 'Supervisor'){
+        values.tipo = 'supervisor'
+      }
+
+      let response = JSON.parse(localStorage.getItem('carrosLocal'));
+
+      if( !response ){
+
+        Object.assign(values, {id: 1});
+        localStorage.setItem("carrosLocal", JSON.stringify([values]));
+
+      }else{
+
+        let lastId = response[response.length - 1].id;
+        Object.assign(values, {id: ++lastId});
+
+        response.push(values)
+        localStorage.setItem("carrosLocal", JSON.stringify(response));
+
+
+      }
+
+      window.location.reload();
   
     }
 
     return(
-        <Container component="main" maxWidth="xs" style={{padding: 5}}>
+        <Container component="main" maxWidth="xs" style={{height: '100%'}}>
         <CssBaseline />
         <Paper className={classes.paper}>
 
@@ -91,6 +118,7 @@ export default function CarroForm( { setCarro } ){
             lng: '',
             cercaDeAtuacao: '',
             tipo: '',
+            nome: '',
           }}
           render={( { values, handleChange, handleSubmit, errors, touched }) => (
 
@@ -118,15 +146,27 @@ export default function CarroForm( { setCarro } ){
                 />
               </Grid>
 
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={12}>
+
+                <TextField
+                  fullWidth
+                  label="Nome"
+                  name="nome"
+                  value={values.nome}
+                  onChange={handleChange}
+                />
+
+              </Grid>
+
+              <Grid item xs={12} sm={12}>
 
               <TextField
                     variant="outlined"
                     autoComplete="off"
                     fullWidth
                     label="Cerca de Atuação"
-                    name="cerca"
-                    value={values.cerca}
+                    name="cercaDeAtuacao"
+                    value={values.cercaDeAtuacao}
                     onChange={handleChange}
                     select
                 >

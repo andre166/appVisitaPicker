@@ -6,12 +6,20 @@ let google = window.google;
 
 const definirPino = ( v ) => {
 
+  // console.log("aaa===>", v)
+
   let url = '';
 
   if( v.turno == 'manhã' ){
 
     if( v.prioridade == 1){
-      url = './redM.png'
+
+      if(v.supervisor){
+        url = './redM-super.png'
+      }else{
+        url = './redM.png'
+      }
+
     }else if( v.prioridade == 2){
 
       if(v.supervisor){
@@ -21,15 +29,33 @@ const definirPino = ( v ) => {
       }
 
     }else if( v.prioridade == 3){
-      url = './greenM.png'
+
+      if(v.supervisor){
+        url = './greenM-super.png'
+      }else{
+        url = './greenM.png'
+      }
+
     }else if( v.prioridade == 4){
-      url = './blackM.png'
+    
+      if(v.supervisor){
+        url = './blackM-super.png'
+      }else{
+        url = './blackM.png'
+      }
+
     }
 
   }else if( v.turno == 'tarde' ){
 
     if( v.prioridade == 1){
-      url = './redT.png'
+
+      if(v.supervisor){
+        url = './redT-super.png'
+      }else{
+        url = './redT.png'
+      }
+
     }else if( v.prioridade == 2){
 
       if(v.supervisor){
@@ -39,9 +65,57 @@ const definirPino = ( v ) => {
       }
 
     }else if( v.prioridade == 3){
-      url = './greenT.png'
+
+      if(v.supervisor){
+        url = './greenT-super.png'
+      }else{
+        url = './greenT.png'
+      }
+
     }else if( v.prioridade == 4){
-      url = './blackT.png'
+
+      if(v.supervisor){
+        url = './blackT-super.png'
+      }else{
+        url = './blackT.png'
+      }
+
+    }
+
+  }else{
+
+    if( v.prioridade == 1 ){
+
+      if(v.supervisor){
+        url = './redQ-super.png'
+      }else{
+        url = './redQ.png'
+      }
+
+    }else if( v.prioridade == 2){
+
+      if(v.supervisor){
+        url = './blueQ-super.png'
+      }else{
+        url = './blueQ.png'
+      }
+
+    }else if( v.prioridade == 3){
+
+      if(v.supervisor){
+        url = './greenQ-super.png'
+      }else{
+        url = './greenQ.png'
+      }
+
+    }else if( v.prioridade == 4){
+
+      if(v.supervisor){
+        url = './blackQ-super.png'
+      }else{
+        url = './blackQ.png'
+      }
+
     }
 
   }
@@ -50,12 +124,45 @@ const definirPino = ( v ) => {
     <Marker 
       icon={{
         url : url,
-        scaledSize: new window.google.maps.Size(30,30)
+        scaledSize: new window.google.maps.Size(35,35)
       }}
-      position={{ lat: v.lat, lng:  v.lng}}
+      position={{ lat: parseFloat(v.lat), lng:  parseFloat(v.lng)}}
     /> 
   )
 }
+
+const definirPinoDoCarro = ( c ) => {
+
+  if( c.tipo == 'supervisor' ){
+
+    return (
+
+      <Marker 
+      icon={{
+        url : './carroSupervisor.png',
+        scaledSize: new window.google.maps.Size(32,32)
+      }} 
+      position={{ lat: parseFloat(c.lat), lng:  parseFloat(c.lng) }} 
+    />
+
+    )
+
+  }else{
+    return(
+      <Marker 
+        icon={{
+          url : './carroSvg.png',
+          scaledSize: new window.google.maps.Size(25,25)
+        }} 
+        position={{ lat: parseFloat(c.lat), lng:  parseFloat(c.lng)}} 
+      />
+  
+    )
+  }
+
+}
+
+       
 
 const MyMapComponent = compose(
   
@@ -101,8 +208,10 @@ const MyMapComponent = compose(
 
   <GoogleMap
     defaultZoom={13}
-    defaultCenter={{ lat: -22.79139388319243, lng: -42.94753874745315 }}
+    defaultCenter={{ lat: props.carro.lat || -22.79139388319243, lng: props.carro.lng || -42.94753874745315 }}
   >
+
+    {console.log("props", props)}
 
     {props.directions && 
       <DirectionsRenderer 
@@ -125,13 +234,10 @@ const MyMapComponent = compose(
     {props.listaDeCarro && 
 
       props.listaDeCarro.map( c => (
-        <Marker 
-          icon={{
-            url : './carroSvg.png',
-            scaledSize: new window.google.maps.Size(35,35)
-          }} 
-          position={{ lat: c.lat, lng:  c.lng}} 
-        />
+
+        definirPinoDoCarro( c )
+
+
       ))
 
     }

@@ -23,15 +23,17 @@ import { useTheme } from '@material-ui/core/styles';
 import { makeStyles, fade } from '@material-ui/core/styles';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
         padding: '10px 20px',
-        marginTop: 5,
+        // marginTop: 5,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        maxWidth: 550
+        maxWidth: 550,
+        height: '100%'
         },
         form: {
           width: '100%', // Fix IE 11 issue.
@@ -47,7 +49,14 @@ const useStyles = makeStyles((theme) => ({
               '&:hover': {
                   background: "#195493",
               },
-          }
+          },
+          lightTooltip: {
+            backgroundColor: theme.palette.common.white,
+            color: 'rgba(0, 0, 0, 0.87)',
+            boxShadow: theme.shadows[1],
+            fontSize: 14,
+            border: '1px solid gray'
+          },
   }))
 
 export default function VisitaForm( { visitas, setVisitas, carro }){
@@ -60,16 +69,44 @@ export default function VisitaForm( { visitas, setVisitas, carro }){
 
     async function onSubmit( values ){
 
-      let listaDeVisitas = visitas;
+      if( values.tipo == 'Manutenção'){
+        values.tipo = 'manutencao'
+      }else if( values.tipo == 'Instalação'){
+        values.tipo = 'instalacao'
+      }
 
-      listaDeVisitas.push(values);
+      if(  values.turno == 'Manhã' ){
+        values.turno = 'manhã';
+      }else if( values.turno == 'Tarde' ){
+        values.turno = 'tarde';
+      }else if( values.turno == 'Qualquer' ){
+        values.turno = '';
+      }
 
-      setVisitas(listaDeVisitas);
+      let response = JSON.parse(localStorage.getItem('visitasLocal'));
+
+      if( !response ){
+
+        Object.assign(values, {id: 1});
+        localStorage.setItem("visitasLocal", JSON.stringify([values]));
+
+      }else{
+
+        let lastId = response[response.length - 1].id;
+        Object.assign(values, {id: ++lastId});
+
+        response.push(values)
+        localStorage.setItem("visitasLocal", JSON.stringify(response));
+
+      }
+
+      window.location.reload();
+      
   
     }
 
     return(
-        <Container component="main" maxWidth="xs" style={{padding: 5}}>
+        <Container component="main" maxWidth="xs" style={{height: '100%'}}>
         <CssBaseline />
         <Paper className={classes.paper}>
 
@@ -194,6 +231,7 @@ export default function VisitaForm( { visitas, setVisitas, carro }){
             </Grid>
 
             <Grid item xs={12} sm={6}>
+            <Tooltip title="Adiciona a flag supervisor='true' para a visita receber apenas carro do tipo supervisor" classes={{ tooltip: classes.lightTooltip }}>
                 <FormControlLabel
                     control={
                     <Checkbox
@@ -205,6 +243,7 @@ export default function VisitaForm( { visitas, setVisitas, carro }){
                     }
                     label="Supervisor"
                 />
+            </Tooltip>
             </Grid>
 
 

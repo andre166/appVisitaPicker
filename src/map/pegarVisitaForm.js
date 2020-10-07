@@ -35,11 +35,11 @@ const cercas = [
 const useStyles = makeStyles((theme) => ({
     paper: {
         padding: '10px 20px',
-        marginTop: 5,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        maxWidth: 550
+        maxWidth: 250,
+        height: '100%'
         },
         form: {
           width: '100%', // Fix IE 11 issue.
@@ -64,12 +64,14 @@ export default function PegarVisitaForm( { setCarro, carro, listaDeCarro, getVis
 
     async function onSubmit( values ){
 
-      setCarro(values);
+      
+
+      // setCarro(values);
   
     }
 
     return(
-        <Container component="main" maxWidth="lg" style={{padding: 5}}>
+        <Container component="main" maxWidth="lg" style={{height: '100%'}}>
         <CssBaseline />
         <Paper className={classes.paper}>
 
@@ -96,7 +98,7 @@ export default function PegarVisitaForm( { setCarro, carro, listaDeCarro, getVis
           }}
           render={( { values, handleChange, handleSubmit, errors, touched }) => (
 
-          <Form onSubmit={handleSubmit} autoComplete="off" style={{width: '100%'}}>
+          <Form onSubmit={handleSubmit} autoComplete="off" style={{width: '100%', height: '100%'}}>
 
             <Grid container spacing={1} style={{width: '100%'}}>
 
