@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        maxWidth: 250,
+        maxWidth: 400,
         height: '100%'
         },
         form: {
@@ -98,69 +98,74 @@ export default function PegarVisitaForm( { setCarro, carro, listaDeCarro, getVis
 
           <Form onSubmit={handleSubmit} autoComplete="off" style={{width: '100%', height: '100%'}}>
 
-            <Grid container spacing={1} style={{width: '100%'}}>
+            <Grid container spacing={1}  direction="row" justify="space-between" alignItems="space-between">
 
-              <Grid item xs={12} sm={12}>
-
-                <TextField
-                      variant="outlined"
-                      autoComplete="off"
-                      fullWidth
-                      label="Selecione o carro"
-                      name="carro"
-                      value={values.carro}
-                      onChange={handleChange}
-                      select
-                  >
-
-                  {listaDeCarro && listaDeCarro.map( (p, i) => (
-
-                    <MenuItem key={i} value={ p } className="option">
-                        {p.nome}
-                    </MenuItem>
-
-                  ))}
-
-                </TextField>
-
-                <Grid item xs={12} sm={12}>
+                <Grid item xs={12} sm={6}>
                   <TextField
-                    value={values.hora}
-                    style={{marginTop: 10}}
-                    id="time"
-                    label="Hora"
-                    type="time"
-                    name="hora"
-                    className={classes.textField}
-                    onChange={handleChange}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    
-                  />
+                        variant="outlined"
+                        autoComplete="off"
+                        fullWidth
+                        label="Selecione o carro"
+                        name="carro"
+                        value={values.carro}
+                        onChange={handleChange}
+                        select
+                    >
+
+                    {listaDeCarro && listaDeCarro.map( (p, i) => (
+
+                      <MenuItem key={i} value={ p } className="option">
+                          {p.nome}
+                      </MenuItem>
+
+                    ))}
+
+                  </TextField>
                 </Grid>
 
+
+
+                <Grid item xs={12} sm={6}>
+                  <Grid container spacing={1}  direction="row" justify="flex-end" alignItems="space-between">
+                    <TextField
+                      value={values.hora}
+                      style={{marginTop: 10}}
+                      id="time"
+                      label="Hora"
+                      type="time"
+                      name="hora"
+                      className={classes.textField}
+                      onChange={handleChange}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      
+                    />
+                  </Grid>
+
+                </Grid>
+
+            
+
+
+              <Grid item xs={12} sm={12}>
+                <Grid container direction="column" justify="center" alignItems="center">
+                  <Button
+                      size="small"
+                      style={{margin: '20px 0px 15px 0px'}}
+                      type="submit"
+                      variant="contained"
+                      color="primary"
+                      className={classes.buttonInfo}
+                      onClick={() => getVisita( values.carro, values.hora )}
+                      
+                      >
+                    pegar Visita
+                  </Button>
+                </Grid>
               </Grid>
 
             </Grid>
-
-            <Grid item xs={12} sm={12}>
-              <Grid container direction="column" justify="center" alignItems="center">
-                <Button
-                    size="small"
-                    style={{margin: '20px 0px 15px 0px'}}
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    className={classes.buttonInfo}
-                    onClick={() => getVisita( values.carro, values.hora )}
-                    
-                >
-                  pegar Visita
-                </Button>
-              </Grid>
-            </Grid>
-
             </Form>
           )}
           />

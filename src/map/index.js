@@ -144,14 +144,14 @@ const definirPino = ( v ) => {
 
   }
 
-  const msg = `Prioridade: ${v.prioridade} \nTipo: ${v.tipo}\nSupervisorFlag: ${v.supervisor}\nLat: ${v.lat}, Lng: ${v.lng}`
+  const msg = `Prioridade: ${v.prioridade}\nNome: ${v.nome} \nTipo: ${v.tipo}\nSupervisorFlag: ${v.supervisor}\nLat: ${v.lat}, Lng: ${v.lng}`
 
   return (
     <Tooltip title={msg}>
       <Marker 
         icon={{
           url : url,
-          scaledSize: new window.google.maps.Size(35,35)
+          scaledSize: new window.google.maps.Size(25,25)
         }}
         position={{ lat: parseFloat(v.lat), lng:  parseFloat(v.lng)}}
       /> 
@@ -161,38 +161,29 @@ const definirPino = ( v ) => {
 
 const definirPinoDoCarro = ( c ) => {
 
-  const msg = `Cerca de atuação: ${c.cercaDeAtuacao} \nNome: ${c.nome}\nTipo: ${c.tipo}\nLat: ${c.lat}, Lng: ${c.lng}`
+  const msg = `Cerca de atuação: ${c.cercaDeAtuacao} \nNome: ${c.nome}\nTipo: ${c.tipo}\nLat: ${c.lat}, Lng: ${c.lng}`;
+
+  let url = '';
+
+  if( c.tipo == 'manutencao' ){
+    url = './carro-mnt.png';
+  }else if( c.tipo == 'instalacao' ){
+    url = './carro-inst.png';
+  }
 
   if( c.tipo == 'supervisor' ){
 
     return (
-
       <Tooltip title={msg}>
-        <Marker 
-          icon={{
-            url : './carroSupervisor.png',
-            scaledSize: new window.google.maps.Size(32,32)
-          }} 
-          position={{ lat: parseFloat(c.lat), lng:  parseFloat(c.lng) }} 
-        />
+        <Marker icon={{ url: './carroSupervisor.png', scaledSize: new window.google.maps.Size(25,25)}} position={{ lat: parseFloat(c.lat), lng:  parseFloat(c.lng) }} />
       </Tooltip>
-
-
     )
 
   }else{
     return(
       <Tooltip title={msg}>
-        <Marker 
-          icon={{
-            url : './carroSvg.png',
-            scaledSize: new window.google.maps.Size(25,25)
-          }} 
-          position={{ lat: parseFloat(c.lat), lng:  parseFloat(c.lng)}} 
-        />
+        <Marker icon={{ url: url, scaledSize: new window.google.maps.Size(25,25) }}  position={{ lat: parseFloat(c.lat), lng:  parseFloat(c.lng)}} />
       </Tooltip>
-
-  
     )
   }
 
@@ -275,8 +266,6 @@ const MyMapComponent = compose(
       path={itb7} key={1} options={{ fillColor: "#0b37ff", fillOpacity: 0.175, strokeColor: "#0b37ff", strokeOpacity: 0.3, strokeWeight: 1 }}
     />
 
-
-
     {props.directions && 
       <DirectionsRenderer 
       options={{
@@ -332,7 +321,7 @@ export default function Map( { visitas, carro, resultVisitaPicker, listaDeCarro 
 
   return (
 
-    <div style={{height: 650}}>
+    <div style={{height: 700}}>
       {renderMap && <MyMapComponent visitas={visitas} carro={carro} listaDeCarro={listaDeCarro} resultVisitaPicker={resultVisitaPicker}/>}
     </div>
 
