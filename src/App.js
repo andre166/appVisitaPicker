@@ -152,7 +152,7 @@ function App() {
 
     console.log("carro_visita", carro_visita)
 
-    let resp = await axios.post(`http://localhost:3001/getVisita`, carro_visita)
+    let resp = await axios.post(`https://visitapicker-backend.herokuapp.com/getVisita`, carro_visita)
     .catch((error) => { return error });
 
     if(resp.data){
@@ -240,7 +240,43 @@ function App() {
             <h3 style={{marginTop: 0}}>Legenda</h3>
           </Grid>
 
-          <Paper style={{width: '98%', padding: 5}}>
+          <Paper style={{width: '98%', padding: 5, marginTop: 10}}>
+
+          <Grid style={{marginTop: 5, textAlign: 'center'}}>
+            Prioridade
+          </Grid>
+
+          <Divider/>
+
+          <Grid container direction="row"  alignItems="center" justify="center">
+            {priopridades.map( p => (
+              <div style={{ background: p.cor, width: 20, height: 20, margin: 5, borderRadius: 3, display: 'flex', alignItems: 'center', justifyContent: 'center'}}> 
+                <h6 style={{color: p.nCor}}>{p.pri}</h6> 
+              </div>
+            ))}
+          </Grid>
+
+        </Paper>
+
+          <Paper style={{width: '98%', padding: 5, marginTop: 10}}>
+
+          <Grid style={{marginTop: 5, textAlign: 'center'}}>
+            Turno
+          </Grid>
+
+          <Divider/>
+
+          <Grid container direction="column"  alignItems="flex-start" justify="flex-start" style={{padding: 20}}>
+
+            <h4 style={{margin: 0}}>{'M: Manhã <= 12:00'}</h4>
+            <h4 style={{margin: 0}}>{'T: Tarde > 12:00'}</h4>
+            <h4 style={{margin: 0}}>{'Q: Qualquer turno'}</h4>
+            
+          </Grid>
+
+        </Paper>
+
+          <Paper style={{width: '98%', padding: 5, marginTop: 10}}>
 
             <Grid container direction="row"  justify="flex-start" alignItems="flex-start" spacing={5}>
 
@@ -271,42 +307,6 @@ function App() {
             </Grid>
 
           </Paper>
-
-        <Paper style={{width: '98%', padding: 5, marginTop: 10}}>
-
-          <Grid style={{marginTop: 5, textAlign: 'center'}}>
-            Prioridade
-          </Grid>
-
-          <Divider/>
-
-          <Grid container direction="row"  alignItems="center" justify="center">
-            {priopridades.map( p => (
-              <div style={{ background: p.cor, width: 20, height: 20, margin: 5, borderRadius: 3, display: 'flex', alignItems: 'center', justifyContent: 'center'}}> 
-                <h6 style={{color: p.nCor}}>{p.pri}</h6> 
-              </div>
-            ))}
-          </Grid>
-
-        </Paper>
-
-        <Paper style={{width: '98%', padding: 5, marginTop: 10}}>
-
-          <Grid style={{marginTop: 5, textAlign: 'center'}}>
-            Turno
-          </Grid>
-
-          <Divider/>
-
-          <Grid container direction="column"  alignItems="flex-start" justify="flex-start" style={{padding: 20}}>
-
-            <h4 style={{margin: 0}}>{'M: Manhã <= 12:00'}</h4>
-            <h4 style={{margin: 0}}>{'T: Tarde > 12:00'}</h4>
-            <h4 style={{margin: 0}}>{'Q: Qualquer turno'}</h4>
-            
-          </Grid>
-
-        </Paper>
 
         </div>
 

@@ -64,8 +64,6 @@ export default function PegarVisitaForm( { setCarro, carro, listaDeCarro, getVis
 
     async function onSubmit( values ){
 
-      
-
       // setCarro(values);
   
     }
