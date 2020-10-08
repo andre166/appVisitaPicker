@@ -105,6 +105,9 @@ export default function PegarVisitaForm( { listaDeCarro, getVisita } ){
                     {listaDeCarro && listaDeCarro.map( (p, i) => (
 
                       <ListItem key={i} value={ p } button>
+                        <Avatar style={{width: 18, height: 18, marginRight: 5, background: p.polColor || '#eeeeee'}}>
+                          <span></span>
+                        </Avatar>
                         {p.nome}
                       </ListItem>
                     ))}
