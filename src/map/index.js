@@ -15,7 +15,7 @@ const definirPino = ( v ) => {
     if( v.prioridade == 1){
 
       if(v.supervisor){
-        url = './redM-super.PNG'
+        url = './redM-super.png'
       }else if( v.tipo == 'instalacao' ){
         url = './redM-inst.png'
       }else if( v.tipo == 'manutencao'){
@@ -25,7 +25,7 @@ const definirPino = ( v ) => {
     }else if( v.prioridade == 2){
 
       if(v.supervisor){
-        url = './blueM-super.PNG'
+        url = './blueM-super.png'
       }else if( v.tipo == 'instalacao' ){
         url = './blueM-inst.png'
       }else if( v.tipo == 'manutencao'){
@@ -37,9 +37,9 @@ const definirPino = ( v ) => {
       if(v.supervisor){
         url = './greenM-super.PNG'
       }else if( v.tipo == 'instalacao' ){
-        url = './greenM-inst.png'
+        url = './greenM-inst.PNG'
       }else if( v.tipo == 'manutencao'){
-        url = './greenM-mnt.png'
+        url = './greenM-mnt.PNG'
       }
 
     }else if( v.prioridade == 4){
@@ -59,7 +59,7 @@ const definirPino = ( v ) => {
     if( v.prioridade == 1){
 
       if(v.supervisor){
-        url = './redT-super.PNG'
+        url = './redT-super.png'
       }else if( v.tipo == 'instalacao' ){
         url = './redT-inst.png'
       }else if( v.tipo == 'manutencao'){
@@ -69,7 +69,7 @@ const definirPino = ( v ) => {
     }else if( v.prioridade == 2){
 
       if(v.supervisor){
-        url = './blueT-super.PNG'
+        url = './blueT-super.png'
       }else if( v.tipo == 'instalacao' ){
         url = './blueT-inst.png'
       }else if( v.tipo == 'manutencao'){
@@ -81,9 +81,9 @@ const definirPino = ( v ) => {
       if(v.supervisor){
         url = './greenT-super.PNG'
       }else if( v.tipo == 'instalacao' ){
-        url = './greenT-inst.png'
+        url = './greenT-inst.PNG'
       }else if( v.tipo == 'manutencao'){
-        url = './greenT-mnt.png'
+        url = './greenT-mnt.PNG'
       }
 
     }else if( v.prioridade == 4){
