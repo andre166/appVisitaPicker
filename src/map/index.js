@@ -3,161 +3,9 @@ import { compose, withProps, lifecycle } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, DirectionsRenderer, Polygon } from "react-google-maps"
 import { itb1, itb2, itb3, itb4, itb5, itb6, itb7 } from './poligonos';
 import Tooltip from '@material-ui/core/Tooltip';
+import definirPino from './definirPino';
 
 let google = window.google;
-
-const definirPino = ( v ) => {
-
-  let url = '';
-
-  if( v.turno == 'manhã' ){
-
-    if( v.prioridade == 1){
-
-      if(v.supervisor){
-        url = './redM-super.png'
-      }else if( v.tipo == 'instalacao' ){
-        url = './redM-inst.png'
-      }else if( v.tipo == 'manutencao'){
-        url = './redM-mnt.png'
-      }
-
-    }else if( v.prioridade == 2){
-
-      if(v.supervisor){
-        url = './blueM-super.png'
-      }else if( v.tipo == 'instalacao' ){
-        url = './blueM-inst.png'
-      }else if( v.tipo == 'manutencao'){
-        url = './blueM-mnt.png'
-      }
-
-    }else if( v.prioridade == 3){
-
-      if(v.supervisor){
-        url = './greenM-super.PNG'
-      }else if( v.tipo == 'instalacao' ){
-        url = './greenM-inst.PNG'
-      }else if( v.tipo == 'manutencao'){
-        url = './greenM-mnt.PNG'
-      }
-
-    }else if( v.prioridade == 4){
-    
-      if(v.supervisor){
-        url = './blackM-super.png'
-      }else if( v.tipo == 'instalacao' ){
-        url = './blackM-inst.png'
-      }else if( v.tipo == 'manutencao'){
-        url = './blackM-mnt.png'
-      }
-
-    }
-
-  }else if( v.turno == 'tarde' ){
-
-    if( v.prioridade == 1){
-
-      if(v.supervisor){
-        url = './redT-super.png'
-      }else if( v.tipo == 'instalacao' ){
-        url = './redT-inst.png'
-      }else if( v.tipo == 'manutencao'){
-        url = './redT-mnt.png'
-      }
-
-    }else if( v.prioridade == 2){
-
-      if(v.supervisor){
-        url = './blueT-super.png'
-      }else if( v.tipo == 'instalacao' ){
-        url = './blueT-inst.png'
-      }else if( v.tipo == 'manutencao'){
-        url = './blueT-mnt.png'
-      }
-
-    }else if( v.prioridade == 3){
-
-      if(v.supervisor){
-        url = './greenT-super.PNG'
-      }else if( v.tipo == 'instalacao' ){
-        url = './greenT-inst.PNG'
-      }else if( v.tipo == 'manutencao'){
-        url = './greenT-mnt.PNG'
-      }
-
-    }else if( v.prioridade == 4){
-
-      if(v.supervisor){
-        url = './blackT-super.png'
-      }else if( v.tipo == 'instalacao' ){
-        url = './blackT-inst.png'
-      }else if( v.tipo == 'manutencao'){
-        url = './blackT-mnt.png'
-      }
-
-    }
-
-  }else{
-
-    if( v.prioridade == 1 ){
-
-      if(v.supervisor){
-        url = './redQ-super.PNG'
-      }else if( v.tipo == 'instalacao' ){
-        url = './redQ-inst.png'
-      }else if( v.tipo == 'manutencao'){
-        url = './redQ-mnt.png'
-      }
-
-    }else if( v.prioridade == 2){
-
-      if(v.supervisor){
-        url = './blueQ-super.PNG'
-      }else if( v.tipo == 'instalacao' ){
-        url = './blueQ-inst.png'
-      }else if( v.tipo == 'manutencao'){
-        url = './blueQ-mnt.png'
-      }
-
-    }else if( v.prioridade == 3){
-
-      if(v.supervisor){
-        url = './greenQ-super.PNG'
-      }else if( v.tipo == 'instalacao' ){
-        url = './greenQ-inst.png'
-      }else if( v.tipo == 'manutencao'){
-        url = './greenQ-mnt.png'
-      }
-
-    }else if( v.prioridade == 4){
-
-      if(v.supervisor){
-        url = './blackQ-super.png'
-      }else if( v.tipo == 'instalacao' ){
-        url = './blackQ-inst.png'
-      }else if( v.tipo == 'manutencao'){
-        url = './blackQ-mnt.png'
-      }
-
-    }
-
-  }
-
-  const msg = `Prioridade: ${v.prioridade}\nNome: ${v.nome} \nTipo: ${v.tipo}\nSupervisorFlag: ${v.supervisor}\nLat: ${v.lat}, Lng: ${v.lng}`
-
-  return (
-    <Tooltip title={msg}>
-      <Marker 
-        icon={{
-          url : url,
-          scaledSize: new window.google.maps.Size(25,25)
-        }}
-        position={{ lat: parseFloat(v.lat), lng:  parseFloat(v.lng)}}
-      /> 
-    </Tooltip>
-  )
-}
 
 const definirPinoDoCarro = ( c ) => {
 
@@ -189,7 +37,15 @@ const definirPinoDoCarro = ( c ) => {
 
 }
 
-       
+const pols = [
+  {cerca: itb1, fColor: "#ffaaff", fOpacity: 0.175, sColor: "#ffaaff", sOpacity: 1, sWeight: 1}, 
+  {cerca: itb2, fColor: "#55ffff", fOpacity: 0.175, sColor: "#55ffff", sOpacity: 1, sWeight: 1}, 
+  {cerca: itb3, fColor: "#ffff00", fOpacity: 0.175, sColor: "#ffff00", sOpacity: 1, sWeight: 1}, 
+  {cerca: itb4, fColor: "#aa5500", fOpacity: 0.175, sColor: "#aa5500", sOpacity: 0.5, sWeight: 1}, 
+  {cerca: itb5, fColor: "#9d0e2d", fOpacity: 0.175, sColor: "#9d0e2d", sOpacity: 0.5, sWeight: 1}, 
+  {cerca: itb6, fColor: "#4f1355", fOpacity: 0.175, sColor: "#4f1355", sOpacity: 0.5, sWeight: 1}, 
+  {cerca: itb7, fColor: "#0b37ff", fOpacity: 0.175, sColor: "#0b37ff", sOpacity: 0.3, sWeight: 1}, 
+]
 
 const MyMapComponent = compose(
   
@@ -238,33 +94,13 @@ const MyMapComponent = compose(
     defaultCenter={{ lat: props.carro.lat || -22.79139388319243, lng: props.carro.lng || -42.94753874745315 }}
   >
 
-    <Polygon
-      path={itb1} key={1} options={{ fillColor: "#ffaaff", fillOpacity: 0.175, strokeColor: "#ffaaff", strokeOpacity: 1, strokeWeight: 1}}
-    />
+    {pols.map( p => (
 
-    <Polygon
-      path={itb2} key={1} options={{ fillColor: "#55ffff", fillOpacity: 0.175, strokeColor: "#55ffff",strokeOpacity: 1, strokeWeight: 1 }}
-    />
+      <Polygon
+        path={p.cerca} key={1} options={{ fillColor: p.fColor, fillOpacity: p.fOpacity, strokeColor: p.sColor, strokeOpacity: p.sOpacity, strokeWeight: p.sWeight}}
+      />
 
-    <Polygon
-      path={itb3} key={1} options={{ fillColor: "#ffff00", fillOpacity: 0.175, strokeColor: "#ffff00",strokeOpacity: 1, strokeWeight: 1 }}
-    />
-
-    <Polygon
-      path={itb4} key={1} options={{ fillColor: "#aa5500", fillOpacity: 0.175, strokeColor: "#aa5500", strokeOpacity: 0.5, strokeWeight: 1 }}
-    />
-
-    <Polygon
-      path={itb5} key={1} options={{ fillColor: "#9d0e2d", fillOpacity: 0.175, strokeColor: "#9d0e2d", strokeOpacity: 0.5, strokeWeight: 1 }}
-    />
-
-    <Polygon
-      path={itb6} key={1} options={{ fillColor: "#4f1355", fillOpacity: 0.175, strokeColor: "#4f1355", strokeOpacity: 0.5, strokeWeight: 1 }}
-    />
-
-    <Polygon
-      path={itb7} key={1} options={{ fillColor: "#0b37ff", fillOpacity: 0.175, strokeColor: "#0b37ff", strokeOpacity: 0.3, strokeWeight: 1 }}
-    />
+    ))}
 
     {props.directions && 
       <DirectionsRenderer 
@@ -287,10 +123,7 @@ const MyMapComponent = compose(
     {props.listaDeCarro && 
 
       props.listaDeCarro.map( c => (
-
         definirPinoDoCarro( c )
-
-
       ))
 
     }

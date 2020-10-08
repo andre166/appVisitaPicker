@@ -1,26 +1,18 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
-import { Formik, Form, ErrorMessage } from 'formik';
+import { Formik, Form } from 'formik';
 import { Paper } from '@material-ui/core';
-// import GenerateAlert from '../../../components/errorAlert';
-import KeyboardReturnIcon from '@material-ui/icons/KeyboardReturn';
-import { Link, useParams } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
-import withWidth from '@material-ui/core/withWidth';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import FormControl from '@material-ui/core/FormControl';
-import LockIcon from '@material-ui/icons/Lock';
-import { useHistory} from 'react-router-dom';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { useTheme } from '@material-ui/core/styles';
 import { makeStyles, fade } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Avatar from '@material-ui/core/Avatar';
+import Divider from '@material-ui/core/Divider';
 
 const cercas = [
     'Área 01 - Manillha - ITB 01',
@@ -58,13 +50,11 @@ const useStyles = makeStyles((theme) => ({
           }
   }))
 
-export default function PegarVisitaForm( { setCarro, carro, listaDeCarro, getVisita } ){
+export default function PegarVisitaForm( { listaDeCarro, getVisita } ){
      
     const classes = useStyles();
 
     async function onSubmit( values ){
-
-      // setCarro(values);
   
     }
 
@@ -114,10 +104,9 @@ export default function PegarVisitaForm( { setCarro, carro, listaDeCarro, getVis
 
                     {listaDeCarro && listaDeCarro.map( (p, i) => (
 
-                      <MenuItem key={i} value={ p } className="option">
-                          {p.nome}
-                      </MenuItem>
-
+                      <ListItem key={i} value={ p } button>
+                        {p.nome}
+                      </ListItem>
                     ))}
 
                   </TextField>
